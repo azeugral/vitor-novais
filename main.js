@@ -109,13 +109,14 @@
     };
   }
 
-  var telas = { c: document.querySelector('.q-centro .tela'), e: document.querySelector('.q-esq .tela'), d: document.querySelector('.q-dir .tela') };
+  var telas = { c: document.querySelector('.q-centro .tela'), e: document.querySelector('.q-esq .tela'), d: document.querySelector('.q-dir .tela'), be: document.querySelector('.q-be .tela'), bd: document.querySelector('.q-bd .tela') };
+  var KS = ['c', 'e', 'd', 'be', 'bd'];
   var G = {}, comGL = true;
-  try { ['c', 'e', 'd'].forEach(function (k) { if (telas[k]) { G[k] = TelaGL(telas[k]); if (!G[k]) throw new Error('sem webgl'); } }); }
+  try { KS.forEach(function (k) { if (telas[k]) { G[k] = TelaGL(telas[k]); if (!G[k]) throw new Error('sem webgl'); } }); }
   catch (er) { comGL = false; document.querySelectorAll('.tela canvas.gl').forEach(function (x) { x.parentNode.removeChild(x); }); }
   if (comGL) {
     document.documentElement.classList.add('tem-gl');
-    window.addEventListener('resize', function () { ['c', 'e', 'd'].forEach(function (k) { if (G[k]) G[k].desenha(); }); });
+    window.addEventListener('resize', function () { KS.forEach(function (k) { if (G[k]) G[k].desenha(); }); });
   }
 
   var placa = document.querySelector('.placa'), pt = document.querySelector('.placa-t'), pe = document.querySelector('.placa-e');
@@ -136,7 +137,7 @@
     });
   }
   function mostra(primeira) {
-    var c = DEST[idx], e = DEST[(idx + n - 1) % n], d = DEST[(idx + 1) % n], info = byS[c];
+    var c = DEST[idx], e = DEST[(idx + n - 1) % n], d = DEST[(idx + 1) % n], be = DEST[(idx + n - 2) % n], bd = DEST[(idx + 2) % n], info = byS[c];
     telas.c.querySelector('.base').alt = 'Tatuagem de Vitor Novais: ' + info[2];
     if (!primeira) {
       placa.classList.add('troca');
@@ -144,6 +145,7 @@
     }
     // em onda: o quadro central primeiro, os laterais logo a seguir
     por('c', c, primeira ? 200 : 0); por('e', e, primeira ? 650 : 450); por('d', d, primeira ? 650 : 450);
+    por('be', be, primeira ? 1000 : 850); por('bd', bd, primeira ? 1000 : 850);
   }
   mostra(true);
   function avanca() { idx = (idx + 1) % n; mostra(false); }
@@ -152,6 +154,27 @@
     if (document.hidden) { clearInterval(ciclo); ciclo = null; }
     else if (!ciclo) ciclo = setInterval(avanca, 5500);
   });
+
+  /* ---------- fundo do hero: fumaça dourada ao vivo no PC, MP4 no celular ---------- */
+  (function () {
+    var cv = document.getElementById('fumo'), vd = document.getElementById('fumov'); if (!cv || !vd) return;
+    var hero = cv.parentNode, RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (matchMedia('(max-width: 900px)').matches || !window.fumacaGL) {
+      cv.parentNode.removeChild(cv); vd.style.display = 'block';
+      if (!RM) { vd.autoplay = true; var p = vd.play && vd.play(); if (p && p.catch) p.catch(function () {}); }
+      return;
+    }
+    vd.parentNode.removeChild(vd);
+    var T = null; try { T = window.fumacaGL(cv); } catch (e) { T = null; }
+    if (!T) { cv.parentNode.removeChild(cv); return; }
+    var vis = true, t0 = performance.now();
+    function sz() { T.tamanho(hero.clientWidth, hero.clientHeight); } sz(); window.addEventListener('resize', sz);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { vis = e[0].isIntersecting; }).observe(hero);
+    (function loop(now) {
+      requestAnimationFrame(loop); if (!vis || document.hidden) return;
+      T.desenhar(RM ? 0 : ((now - t0) / 40000 * 6.283185) % 6.283185, .5);
+    })(t0);
+  })();
 
   /* ---------- PORTFÓLIO ---------- */
   var grelha = document.getElementById('grelha'), mais = document.getElementById('mais');
