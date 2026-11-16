@@ -127,8 +127,7 @@ button{font:inherit;color:inherit}
 .moldura{width:100%;padding:8px;background:var(--gil);box-shadow:0 22px 44px -18px rgba(0,0,0,.8)}
 .moldura img{width:100%;aspect-ratio:4/5;object-fit:cover;box-shadow:0 0 0 2px #0d0b09,0 0 0 3px rgba(226,197,140,.5)}
 .hist h3{font-family:"Pirata One",serif;font-size:28px;line-height:1.1;color:var(--ouro-claro);margin-top:8px}
-.hist-longa{color:var(--cinza);font-size:16px;max-width:300px}
-.hist-curta{display:none}
+.hist-longa{color:var(--cinza);font-size:16px;max-width:300px;text-wrap:pretty}
 
 /* O VITOR */
 .vitor-corpo{display:grid;grid-template-columns:minmax(0,380px) minmax(0,520px);gap:clamp(30px,5vw,72px);justify-content:center;align-items:center;max-width:1040px;margin:0 auto}
@@ -262,8 +261,8 @@ textarea{resize:vertical}
   .filtros button{font-size:12px;letter-spacing:.1em}
   .hist-grelha{gap:16px 12px}
   .hist h3{font-size:21px;margin-top:4px}
-  .hist-longa{display:none}
-  .hist-curta{display:block;color:var(--cinza);font-size:14px;line-height:1.4}
+  .hist{justify-content:flex-start}
+  .hist-longa{font-size:13px;line-height:1.5;max-width:none}
   .moldura{padding:5px}
   .linhas li{grid-template-columns:1fr;grid-template-areas:"ano" "ev" "loc";text-align:center;padding:20px 4px;row-gap:2px}
   .l-ano{padding-top:0}
