@@ -172,7 +172,7 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { vis = e[0].isIntersecting; }).observe(hero);
     (function loop(now) {
       requestAnimationFrame(loop); if (!vis || document.hidden) return;
-      T.desenhar(RM ? 0 : ((now - t0) / 40000 * 6.283185) % 6.283185, .5);
+      T.desenhar(RM ? 0 : ((now - t0) / 100000 * 6.283185) % 6.283185, .5);
     })(t0);
   })();
 

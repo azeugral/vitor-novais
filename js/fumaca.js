@@ -57,14 +57,14 @@ void main(){
   vec2 lc=vec2((uEixo-.5)*uRes.x/esc,-.02);
   float luz=exp(-dot((p-lc)*vec2(.8,1.05),(p-lc)*vec2(.8,1.05))*1.5);
   float base=smoothstep(.75,-.6,p.y);
-  float m=.22+.78*clamp(luz*.9+base*.3,0.,1.);
+  float m=.12+.88*clamp(luz*.95+base*.15,0.,1.);
 
   /* carvão com fumaça de grafite clara; onde a luz bate ela esquenta pro âmbar */
   vec3 fundo=vec3(.051,.043,.035);
   vec3 grafite=mix(vec3(.55,.53,.49),vec3(.88,.7,.42),clamp(luz*1.1,0.,1.));
-  vec3 col=fundo+grafite*veu*m*.24+vec3(.95,.82,.62)*fio*m*.2;
-  col+=vec3(.44,.32,.13)*luz*.17;
-  vec2 v=fc/uRes-.5; col*=1.-.55*dot(v,v);
+  vec3 col=fundo+grafite*veu*m*.11+vec3(.95,.82,.62)*fio*m*.06;
+  col+=vec3(.44,.32,.13)*luz*.14;
+  vec2 v=fc/uRes-.5; col*=1.-.9*dot(v,v);
   /* dither: ruído de gradiente intercalado, troca a cada quadro, some no vídeo comprimido e na tela */
   vec2 gq=fc+vec2(5.588,2.37)*floor(fract(uFase*9.)*64.);
   col+=(fract(52.9829189*fract(dot(gq,vec2(.06711056,.00583715))))-.5)/255.;
