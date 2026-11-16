@@ -63,15 +63,15 @@ button{font:inherit;color:inherit}
 
 .galeria{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:clamp(22px,3.4vw,54px)}
 .quadro-central{margin:0;position:relative;display:flex;flex-direction:column;align-items:center}
-.quadro-central{--qc:min(30vw,calc(39vh * .8),420px)}
+.quadro-central{--qc:min(30vw,calc(46vh * .8),440px)}
 .q-centro{width:var(--qc)}
 .q-centro .tela,.quadro-lado .tela{aspect-ratio:4/5}
 .quadro-lado{width:min(17vw,calc(30vh * .8),250px);margin:0;opacity:.62;filter:saturate(.75) brightness(.8)}
-.tela .base,.tela .topo{position:absolute;inset:0}
+.tela .base,.tela .topo,.tela canvas.gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tem-gl .galeria .tela img{visibility:hidden}
 .tela .topo{-webkit-mask-image:url(img/tinta.png);mask-image:url(img/tinta.png);-webkit-mask-size:3200% 100%;mask-size:3200% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:0 0;mask-position:0 0}
 .tela .topo.entra{animation:tinta 1.15s steps(31,jump-none) forwards}
 @keyframes tinta{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:100% 0;mask-position:100% 0}}
-.coroa{width:calc(var(--qc) * .96);max-width:none;margin-bottom:calc(var(--qc) * -.13);position:relative;z-index:3;opacity:.9;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}
 .placa{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:230px;padding:9px 22px 10px;background:linear-gradient(180deg,#2a2218,#1a150f);border:1px solid var(--linha);box-shadow:inset 0 1px 0 rgba(226,197,140,.18)}
 .placa-t{font-family:"Pirata One",serif;font-size:22px;line-height:1.1;color:var(--ouro-claro);transition:opacity .4s var(--ease)}
 .placa-e{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cinza);transition:opacity .4s var(--ease)}
@@ -81,10 +81,10 @@ button{font:inherit;color:inherit}
 /* ORNAMENTOS (traço do Vitor) */
 .orn{position:absolute;z-index:0;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .orn-hero-e,.orn-hero-d{top:50%;width:clamp(240px,24vw,420px);opacity:.1;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 76%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 76%,transparent 100%)}
-.orn-hero-e{left:clamp(-40px,1vw,40px);transform:translateY(-50%) scaleX(-1)}
-.orn-hero-d{right:clamp(-40px,1vw,40px);transform:translateY(-50%)}
+.orn-hero-e{left:clamp(-40px,1vw,40px);transform:translateY(-50%)}
+.orn-hero-d{right:clamp(-40px,1vw,40px);transform:translateY(-50%) scaleX(-1)}
 .orn-centro{left:50%;top:44px;width:min(980px,96vw);transform:translateX(-50%);opacity:.07;-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 95%);mask-image:linear-gradient(to bottom,#000 30%,transparent 95%)}
-.orn-canto{top:40px;width:clamp(170px,20vw,320px);opacity:.09;-webkit-mask-image:linear-gradient(to bottom,#000 40%,transparent 100%);mask-image:linear-gradient(to bottom,#000 40%,transparent 100%)}
+.orn-canto{top:60px;width:clamp(170px,20vw,320px);opacity:.09;-webkit-mask-image:linear-gradient(to bottom,#000 40%,transparent 100%);mask-image:linear-gradient(to bottom,#000 40%,transparent 100%)}
 .orn-canto-e{left:clamp(4px,3vw,60px)}
 .orn-canto-d{right:clamp(4px,3vw,60px);transform:scaleX(-1)}
 .orn-vitor{left:50%;top:50%;width:clamp(320px,34vw,560px);transform:translate(-50%,-46%);opacity:.06;-webkit-mask-image:radial-gradient(closest-side,#000 55%,transparent 100%);mask-image:radial-gradient(closest-side,#000 55%,transparent 100%)}
@@ -210,7 +210,7 @@ textarea{resize:vertical}
   .nav-links{display:none}
   .nav{grid-template-columns:1fr auto}
   .quadro-lado{display:none}
-  .quadro-central{--qc:min(64vw,calc(46svh * .8),420px)}
+  .quadro-central{--qc:min(64vw,calc(52svh * .8),440px)}
   .orn-hero-e,.orn-hero-d{width:44vw;opacity:.07}
   .hist-grelha{grid-template-columns:repeat(2,1fr)}
   .vitor-corpo{grid-template-columns:1fr;justify-items:center;text-align:center;max-width:560px}
@@ -233,7 +233,7 @@ textarea{resize:vertical}
   .hero-txt .rotulo{display:flex;flex-direction:column;align-items:center}
   .nw{white-space:nowrap}
 .rotulo{font-size:11px;letter-spacing:.2em}
-  .quadro-central{--qc:min(70vw,calc(42svh * .8))}
+  .quadro-central{--qc:min(76vw,calc((100svh - 390px) * .8))}
   .placa{min-width:0;width:min(72vw,300px);margin-top:14px}
   .placa-t{font-size:20px}
   .hero .botoes{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:400px;gap:10px}
